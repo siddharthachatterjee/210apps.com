@@ -1,0 +1,30 @@
+#options {
+    border: 1px solid black;
+    padding: 15px;
+    position: sticky;
+    top: 0;
+    background: white;
+}
+
+
+
+#addons {
+    position: absolute;
+    background: white; 
+    width: max-content;
+    border: 1px solid black;
+    border-top: none;
+    padding: 10px;
+}
+
+.tag {
+    border: 1px solid blue;
+    padding: 5px;
+    border-radius: 5px;
+    margin: 5px;
+    cursor: pointer;
+}
+
+.tag:hover {
+    text-decoration: line-through;
+}

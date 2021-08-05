@@ -1,0 +1,20 @@
+.correct, .semi-correct {
+    padding: 1em;
+    margin: 10px;
+    color: white;
+    width: 200px;
+    border-radius: 5px;
+}
+
+.correct {
+    background: green;
+}
+
+.semi-correct {
+    background: orange
+}
+
+#question .question {
+    font-size: 22px;
+}
+

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<div class = 'page' *ngIf = 'survey'>
+    <h1> {{ survey.name }} by {{ survey.author }} </h1>
+    <ng-container *ngIf = 'selectedQuestion'>
+        <h2> 
+            Question {{ selectedQuestionIndex + 1 }} of {{ survey.questions.length}} 
+        </h2>
+        <span style = 'font-size: 22px;'>
+            {{ selectedQuestion.question }}
+        </span>
+        <div *ngIf = "selectedQuestion.type == 'choice'">
+            <ng-container *ngFor = 'let choice of selectedQuestion.choices; index as i'>
+                <input type = 'checkbox'(click) = 'saveStats(i)' /> {{ choice.option }}
+                <br />
+            </ng-container>
+        </div>
+        <div *ngIf = 'selectedQuestion.type == "single-answer"'>
+            <ng-container *ngFor = 'let choice of selectedQuestion.choices; index as i'>
+                <span>
+                    <input type = 'radio' 
+                        (input) = 'saveSingleAnswer(i, $event)'
+                        [checked] = 'results[ selectedQuestionIndex ].choicesPicked[i].picked'
+                    />
+                    {{ choice.option }}
+                </span>
+                <br />
+            </ng-container>
+        </div>
+        <div *ngIf = 'selectedQuestion.type == "open-ended"'>
+            <textarea style = 'width:100%' [(ngModel)] = 'results[ selectedQuestionIndex ].answer'>
+
+            </textarea>
+        </div>
+        <br />
+
+        <button (click) = 'next()'>
+            next 
+        </button>
+    </ng-container>
+    <ng-container *ngIf = '!selectedQuestion'>
+        <h2> Survey Completed! </h2>
+        View what others had to say at
+        <a [routerLink] = '["/", "stats", surveyId]'>
+            http://210apps.com/stats/{{ surveyId }}
+        </a>
+    </ng-container>
+</div>

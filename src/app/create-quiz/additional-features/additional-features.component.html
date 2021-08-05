@@ -1,0 +1,31 @@
+<div id = 'options'>
+    <h3>  
+        Quiz Creator
+       <span (click) = 'showAddOns = !showAddOns' class = 'add' style = 'width: max-content; cursor: pointer;'>
+        {{ !showAddOns ? 'Settings +' : 'Hide Settings' }}   
+       </span> 
+    </h3>
+    <div *ngIf = 'showAddOns' id = 'addons'>
+        <label for = 'setImage'> Set Quiz Image: </label>
+        <input id = 'setImage'type = 'file' (input) = 'setImage($event.target)'/>
+        <h4> Tags (for searches): </h4>
+        <span *ngIf = '!newQuiz.tags.length'>
+            No tags set
+        </span>
+        <span class = 'tag' *ngFor = 'let tag of newQuiz.tags; index as i' (click) = 'deleteTag(i)'>
+            {{ tag }}
+        </span>
+        <br />
+        <input 
+            placeholder = 'tag'
+            value = 'newQuiz.img'
+            [(ngModel)] = 'newTag'
+        />
+        <button class = 'add' (click) = 'addTag()'> Add Tag + </button>
+        Privacy: 
+        <select [(ngModel)] = 'privacy'>
+            <option value = 'false'> Public(Appears on the site) </option>
+            <option value = 'true'> Private(Only available via the URL) </option>
+        </select>
+    </div>
+</div>

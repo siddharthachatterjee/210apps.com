@@ -1,0 +1,50 @@
+<app-modal [show] = 'showNew' (closed) = 'showNew = false'> 
+    <h1 style = 'margin: 0;'>
+        New 
+        <hr />
+    </h1>
+    <a class = 'new' [href] = 'user? "/create" : "/signin"'> New Quiz + </a>
+    <hr />
+    <a class = 'new' [href] = 'user? "/new-survey" : "/signin"'> New Survey + </a> 
+</app-modal>
+<nav>
+    <ng-container>   
+   <a routerLink = '' [ngClass] = '{hideLogo: showFullSearch}'> 
+        {{ "210apps.com" }} 
+    </a>
+    </ng-container>
+    <div [ngStyle] = '{float: "right"}'>
+        <span style = 'width: 50vw; overflow: hidden;'>
+        <span id = 'clearbutton'style = 'cursor: pointer;'*ngIf = 'showFullSearch' (click) = 'clear()'> X </span>
+            <form style = 'display: inline-block;' (submit) = 'search($event)'>
+                <input 
+                    name = 'search'
+                    [placeholder] = 'showFullSearch? "search title, author, or tag": "🔍"' 
+                    style = 'margin-right: 20px; border: none; font-size: x-large; border-radius: 5px; color: black; padding-left: 5px;'
+                    (click) = ' !searchValue.length && showFullSearch = !showFullSearch'
+                    [ngClass] = '{showFullSearch: showFullSearch, hideSearch: !showFullSearch}'
+                    [(ngModel)] = 'searchValue'
+                    (input) = 'search($event)'
+                />
+            </form>
+        </span>
+        <div [ngClass] = '{"hideformobile": showFullSearch}' class = "navs">       
+            <span style = 'cursor:pointer;'(click) = 'showNew = true'>
+                <span id = 'new-text'> New </span>
+                <button id = 'new' (click) = 'showNew = true'> 
+                    + 
+                </button>
+            </span>
+            <a [routerLink] = "'/account'"*ngIf = 'user' id = 'accounttop' style = 'border-radius: 2em; display: inline-block; vertical-align: bottom;  margin-left: 10px; width: 40px; height: 40px; background-image: url("/assets/images/icons/user3.png"); background-size: contain;'>
+                
+                
+            </a>
+            <a [routerLink] = 'user? "/account" : "/signin"' class = 'hideformobile' style = 'cursor: pointer;'> 
+                {{ !user?  "Sign Up/Sign In" : "" }} 
+                <span *ngIf = 'user'>
+                    {{ user.displayName  }}
+                </span>
+            </a>
+        </div>
+    </div>
+</nav>

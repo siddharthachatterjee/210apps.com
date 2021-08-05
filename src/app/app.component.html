@@ -1,0 +1,49 @@
+
+<!-- <div *ngIf = '!closeNotification && user' id = 'profile-alert'>
+    You can see all the quizzes and surveys you create in your profile
+    <span (click) = 'exitNotification()'style = 'float:right; margin-right: 50px; font-weight: bold; border: 1px solid; cursor: pointer; padding: 0px 5px'>
+        X
+    </span>
+</div> -->
+<app-top-nav> </app-top-nav>
+<!-- /*ngIf = '!quizzes && !surveys' id = 'load-bar'> Loading Data... </div> -->
+<div>
+    <header (click) = 'showFullSearch = falseCondition'style = 'height: max-content; color: white; margin: 0;' *ngIf = '!searchValue.length && route && route.pathname == "/"'>
+        <div id = 'header-container'>
+            <div id = 'header-text'>
+            <span> 
+                
+                <div> Create and view <strong>quizzes</strong> and <strong> surveys </strong></div>
+                </span>
+            <br />
+                
+                <br />
+                
+            </div>
+            
+            <!-- <div id = 'header-image'>
+                <img src = 'assets/images/example2.jpg' height = 100% width = 'auto'/>
+            </div> -->
+        </div>
+
+    </header>
+    <app-explain-cards *ngIf = '!searchValue.length && route && route.pathname == "/"'></app-explain-cards>
+    <!-- <app-new-feature *ngIf = '!searchValue.length && route.pathname == "/"'></app-new-feature> -->
+    <router-outlet (click) = 'clear()' *ngIf = 'quizzes && surveys'></router-outlet>
+    <!-- <ng-container (click) = 'clear()' *ngIf = 'route.pathname == "/"'>
+        <quizzes [searchValue] = 'searchValue' [showAll] = 'false' [show] = '[0, 10]' [data] = '"quizzes"' [dataValues] = "quizzes"></quizzes>
+        
+        <br />
+       
+        <quizzes [searchValue] = 'searchValue' [showAll] = 'false' [show] = '[0, 10]' [data] = '"surveys"' [dataValues] = "surveys"></quizzes>
+        </ng-container> -->
+    <footer>
+
+    </footer>
+</div>
+<style>
+    footer {
+        background: lightgray;
+        height: 25vh;
+    }
+</style>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<nav *ngIf = 'showAll'>
+    
+    <a routerLink="/quizzes" class= 'inactive'> Quizzes </a>
+    <span  id = 'searchbox'> 
+        <!-- <input  
+            [(ngModel)] = 'searchValue' 
+            (input) = 'filterQuizzes()'
+            placeholder = 'search creator, title or tag'
+        />   -->
+       
+        
+        <div id = 'results'>
+            <ng-container *ngIf = 'searchValue.length'>
+                {{ filteredQuizzes.length }} {{ filteredQuizzes.length !== 1 ? 'matches' : 'match'}} found
+            </ng-container>
+        </div>
+    </span>
+    <span>
+        <button routerLink="/create"> 
+            New Quiz + 
+        </button>
+
+        <button routerLink = '/new-survey'>
+            New Survey +
+        </button>
+    </span>
+</nav> 
+
+
+<style>
+    nav {
+        background: rgb(82, 82, 255);
+        padding: 15px;
+        position: sticky;
+        top: 0;
+    }
+    nav a.inactive, #logo {
+        color: white;
+        text-decoration: none;
+        font-size: x-large;
+        border-right: 2px solid whitesmoke;
+        margin-right: 10px;
+        padding-right: 10px;
+        cursor: pointer;
+    }
+
+    nav a.inactive:hover {
+        color: blue;
+        border-right-color: blue;
+    }
+
+    .active {
+        color: yellow
+    }
+
+    nav button {
+        background:  white;
+        color: rgb(82, 82, 255);
+        text-decoration: none;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        margin: 10px;
+        cursor: pointer;
+        font-size: 18px;
+    }
+
+    
+    nav button:hover {
+        box-shadow: 2px 2px 2px dimgray;
+    }
+
+    #searchbox {
+        color: white;
+        font-size: large;
+        margin-right: 50px;
+
+    }
+
+    #results {
+        display: inline-block;
+    }
+    #searchbox input {
+        background: none;
+        border: none;
+        color: whitesmoke;
+        font-size: x-large;
+        border-bottom: 2px solid black
+    }
+
+    #searchbox input::placeholder {
+        color: lightgrey;
+    }
+
+    #searchbox input:focus {
+        outline: none;
+        border-bottom-color: blue;
+    }
+
+    @media (max-width: 800px) {
+        #quizzes-continer {
+            margin: auto;
+            width: 300px
+        }
+    }
+
+    
+    @media (min-width: 500px) {
+        #quizzes-container {
+            grid-template-columns: repeat(3, auto);
+        }
+    }
+
+    #show-all {
+        margin: 0 10px;
+        border: none;
+        background: rgb(82, 82, 255);
+        padding: 10px;
+        color: white;
+        cursor: pointer;
+        border-radius: 5px;
+    }
+
+    #show-all:hover {
+        box-shadow: 2px 2px 5px grey;
+    }
+
+    #load-bar {
+        animation-name: load;
+        animation-duration: 1.5s;
+        animation-fill-mode: forwards;
+        padding: 10px
+    }
+
+    
+</style>
+<div id = 'load-bar' *ngIf = '!filteredQuizzes'>Loading...</div>
+<!-- <button (click) = 'shiftForward()'> hsh </button> -->
+<div *ngIf = 'filteredQuizzes'>
+    
+    <!-- <h3 style = 'margin: 10px'>
+        <app-sort-quizzes (changed) = 'sortQuizzes($event)'> </app-sort-quizzes>
+    </h3> -->
+    <!-- <h2 style = "padding: 1em; background: white; border-bottom: 1px solid grey"> 
+        {{ data | titlecase }}
+        <app-sort-quizzes  *ngIf = 'data === "quizzes"'(changed) = 'sortQuizzes($event)'> </app-sort-quizzes> 
+        <button id = 'show-all' (click) = 'show[1] = show[1] !== filteredQuizzes.length ? filteredQuizzes.length : 10'> 
+            Show {{show[1] !== filteredQuizzes.length? "All" : "Less"}} 
+        </button> 
+     </h2> -->
+    
+    <div *ngIf = '!filteredQuizzes.length && filteredQuizzes'>
+       {{data.includes("your")? "You haven't created any yet." : "No matches found" }}
+    </div>
+
+    <div  id = 'quizzes-container' [ngStyle] = 'styles()'>
+        
+        <ng-container *ngFor = 'let quiz of (filteredQuizzes.slice(show[0], show[1])); index as i'>
+            <app-quiz-card 
+                *ngIf = '(!quiz.private || data.includes("your")) && quiz.status === "complete" && data.includes("quizzes")' 
+                [quiz] =  'quiz' 
+                [routerLink] = '["/", "quizzes", quiz.key]'> 
+
+            </app-quiz-card>
+            <app-survey-card 
+                *ngIf = 'quiz.public && data === "surveys"' 
+                [survey] = 'quiz' 
+                [routerLink] = '["/", "surveys", quiz.key]'>
+
+            </app-survey-card>
+            <app-survey-card 
+                *ngIf = 'quiz.status === "complete" && data === "your surveys"' 
+                [survey] = 'quiz' 
+                [routerLink] = '["/", "stats", quiz.key]'>
+
+            </app-survey-card>
+            <app-quiz-card  
+                [quiz] = "quiz" 
+                *ngIf = 'quiz.status === "incomplete" && data.includes("your quizzes")' 
+                [routerLink]="['/', 'edit', quiz.key]" >
+
+            </app-quiz-card>
+        </ng-container>
+    </div>
+</div>

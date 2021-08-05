@@ -1,0 +1,49 @@
+.modal-wrapper {
+    width: 100vw;
+    height: 100vh;
+    background: #333;
+    opacity: 0.9;
+    position: fixed;
+    z-index: 10;
+}
+
+.modal {
+    margin: auto;
+    width: 33vw;
+    background: white;
+    border-radius: 1em;
+    padding: 3vw;
+    left: 30vw;
+    top: 25vh;
+    opacity: 1;
+    z-index: 11;
+    position: fixed;
+    max-height: 50vh;
+    overflow: hidden;
+}
+
+#close {
+    color: red;
+    top: 27vh;
+    position: fixed;
+    z-index: 12;
+    font-weight: bold;
+    font-size: xx-large;
+    cursor: pointer;
+    right: 33vw;
+}
+
+@media(max-width: 500px) {
+    .modal {
+        width: 90%;
+        left: 2vw;
+        height: 50vh;
+        top: 20vh;
+    }
+
+    #close {
+        top: 22vh;
+        right: 5vw;
+    }
+
+}

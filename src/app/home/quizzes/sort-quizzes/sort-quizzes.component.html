@@ -1,0 +1,20 @@
+<span style = 'display: inline-block;'> 
+    
+
+<select  [(ngModel)]="largestToSmallest">
+    <option [value] = 'true'> Most </option>
+    <option [value] = 'false'> Least </option>
+</select>
+
+<select [(ngModel)] = 'sortValue'>
+    <option value = 'id'> Recent  </option>
+    <option value = 'views'>  Views </option>
+</select>
+
+</span>
+
+<style>
+    span select  {
+        font-size: large;
+    }
+</style>

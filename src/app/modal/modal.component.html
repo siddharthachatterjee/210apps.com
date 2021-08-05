@@ -1,0 +1,9 @@
+<ng-container *ngIf = 'show'>
+    <div  class = 'modal-wrapper'>
+    </div>
+    <span id = 'close' (click) = 'close()' *ngIf = 'showExitButton'> x </span>
+    <div class = 'modal'>
+        <ng-content></ng-content>
+    </div>
+</ng-container>
+

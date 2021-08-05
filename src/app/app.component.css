@@ -1,0 +1,528 @@
+nav {
+    background: blue;
+    color: white;
+    padding: 20px;
+    font-size: 25px;
+    font-weight: bolder;
+}
+
+
+@media(min-width: 500px) {
+    /* nav {
+        box-shadow: 0px 5px 5px whitesmoke;
+    } */
+}
+nav a {
+    height: 40px;
+}
+
+.scrolled {
+    position: fixed;
+    display: block;
+    animation-name: show-scrolled-nav;
+    animation-duration: 1s;
+    overflow: hidden;
+    z-index: 2;
+    animation-fill-mode: forwards;
+    width: 90%;
+    top: 0;
+    background: white;
+    color: blue;
+    box-shadow: 0px 5px 5px lightgray;
+  }
+
+@media (min-width: 500px) {
+    .scrolled {
+        width: 100%;
+    }
+}
+@keyframes show-scrolled-nav {
+    from {
+        height: 0
+    }
+    to {
+        height: 40px;
+    }
+}
+.scrolled a {
+    color: blue;
+}
+
+
+.scrolled #new {
+    background: blue;
+    color: white;
+}
+
+.scrolled #new-options {
+    border: none;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline solid;
+}
+
+/* footer {
+    position: -webkit-sticky;
+    position: -moz-sticky;
+    position: -o-sticky;
+    position: -ms-sticky;
+    position: sticky;
+    font-size: x-large;
+    bottom: 0;
+    top: 90vh;
+    width: 78vw;
+    height: 50px;
+    background: red
+} */
+#new-options {
+    width: 100%;
+    display: block;
+    position: fixed;
+    top: 75px;
+    background: white;
+    padding: 1em 0px;
+    animation-name: shownew;
+    animation-duration: 1s;
+    animation-fill-mode: forwards;
+    border-bottom: 1px solid;
+    text-align: center;
+    overflow: hidden;
+    z-index: 10;
+    box-shadow: 0px 5px 5px grey;
+}
+
+@media(min-width: 500px) {
+    #new-options {
+        width: 50vw;
+        overflow: hidden;
+        margin: auto;
+        display: block;
+        margin-left: 25vw;
+        top: 25vh;
+        animation-name: showNewDesktop;
+        animation-duration: 1s;
+        box-shadow: 5px 5px 5px grey;
+    }
+
+    .new {
+        width: 100%
+    }
+
+    @keyframes showNewDesktop {
+        from {
+            height: 0;
+        }
+        to {
+            height: 50vh
+        }
+    }
+}
+#new-options hr {
+    background: blue;
+}
+#new.active {
+    animation-name: rotate;
+    animation-duration: 1s;
+    animation-fill-mode: both;
+    outline: none;
+}
+
+#new:focus {
+    outline: none;
+}
+
+@keyframes rotate {
+    from {
+        transform: none
+    }
+    to {
+        transform: rotate(135deg);
+        background: red;
+        color: white;
+    }
+}
+
+@keyframes shownew {
+    from {
+        height: 0;
+    }
+    to {
+        height: 100vh
+    }
+}
+
+.new {
+    font-size: 18px;
+    text-decoration: none;
+    color: blue;
+    background: white;
+    padding: 10px;
+    display: block;
+}
+
+.new:hover {
+    background: blue;
+    color: white;
+}
+#new {
+    font-size: 27px;
+    color: blue;
+    background: white;
+    display: inline-block;
+    width: 40px;
+    height: 40px;
+    text-align: center;
+    border-radius: 2em;
+    border: none;
+}
+
+
+
+@media (max-width: 500px) {
+    /* footer {
+        font-size: 14px; */
+    /* } */
+
+    #new-text {
+        display: none;
+    }
+
+    #new-options h1 {
+        display: none;
+    }
+
+    .new {
+        width: 90%
+    }
+}
+
+#new-text {
+    margin-right: 10px;
+}
+#load-bar {
+    animation-name: load;
+    animation-duration: 1.2s;
+    background: skyblue;
+    padding: 10px;
+    white-space: nowrap;
+}
+
+@keyframes load {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100vw
+    }
+}
+
+
+
+#hamburger-menu {
+    display: inline-block
+}
+#hamburger-menu button {
+    background: inherit;
+    border: none;
+}
+
+#hamburger-menu button:focus {
+    outline: none;
+}
+#menu-content {
+    height: 100vh;
+    width: 50vw;
+    background: white;
+    position: absolute;
+    font-size: 18px;
+    z-index: 50;
+
+}
+.show {
+    /* animation-name: show;
+    animation-duration: 1s;
+    animation-fill-mode: forwards; */
+    z-index: 9;
+    height: 100vh;
+    width: 75vw;
+    background: white;
+    border-left: 1px solid grey;
+    padding: 10px;
+    left: 0;
+    position: fixed;
+    top: 0
+}
+
+.hide {
+    animation-name: hide;
+    animation-duration: 1s;
+    position: unset;
+    animation-fill-mode: forwards;
+}
+@keyframes show {
+    from { width: 0 }
+    to { width: 75vw }
+}
+
+@keyframes hide {
+    from {
+        width: auto
+    }
+    to {
+        width: auto
+    }
+}
+
+.hide {
+    left: 5vw;
+}
+/* [ngStyle] = '{width: showMenu ? "75vw" : "auto", height: showMenu ? "100vh" : "auto", background: showMenu ? "white" : "none", right: showMenu? 0 : "25vw"}' */
+
+@media (min-width: 500px) {
+    #hamburger-menu button {    
+        display: none;
+    }
+
+    #new {
+        margin-right: 20px;
+        cursor: pointer
+    }
+}
+
+@media (max-width: 500px) {
+    .hideformobile {
+        display: none;
+    }
+
+    .navs.hideformobile {
+        display: none;
+    }
+    .hideNavs {
+        display: none;
+    }
+}
+
+#singintop {
+    padding: 10px;
+    display: block;
+    /* background: lightgreen; */
+    color: white;
+}
+
+.showFullSearch {
+    width: 70vw;
+    background: whitesmoke;
+}
+
+.hideLogo {
+    opacity: 0;
+    width: 0;
+    overflow: hidden;
+    font-size: 1px;
+}
+
+@media(min-width: 500px) {
+    .hideLogo {
+        opacity: 1;
+        width: auto;
+        font-size: unset;
+    }
+
+    .showFullSearch {
+        width: 33vw
+    }
+}
+
+
+
+.hideSearch {
+    width: 40px;
+    background: inherit;
+}
+header {
+    background: blue;
+    color: white;
+}
+
+@media(min-width: 500px) {
+     .hideSearch, .showFullSearch {
+         width: 33vw;
+         background: whitesmoke
+     }
+     #clearbutton {
+         display: none;
+     }
+
+    
+    
+}
+
+/* footer {
+    background: white;
+    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0px;
+    text-align: center;
+    padding: 10px;
+}
+
+footer  */
+.nav-button:hover {
+    opacity: 0.7;
+}
+
+#header-text {
+    display: inline-block;
+    margin: 0px 50px; 
+    width: 50vw; 
+    color: white;
+    
+    background: blue;
+    /* height: 35vh */
+}
+
+#header-text span {
+    font-size: 40px;
+    font-weight: bolder;
+}
+
+#header-buttons a {
+    margin-right: 10px;
+    color: #1c1c1c;
+    background: white;
+    padding: 0.6em;
+    display: inline-block;
+    border: 1px solid;
+    border-radius: 10px;
+}
+
+@media(max-width: 800px) {
+    #header-text span {
+        font-size: 30px
+    }
+}
+
+header {
+    background: lightgray;
+    padding: 0;   
+       
+}
+
+#header-container {
+    width: 100%;
+    padding: 2em;
+    background: blue;
+    display: flex;
+    align-items: center;
+}
+@media(max-width: 500px) {
+    #header-text {
+        margin: 0;
+        text-align: center;
+        width: 100vw;
+        color: whitesmoke;
+    }
+    #header-text span {
+        background:  inherit;
+        width: 80%;
+        margin: auto;
+        display: flex;
+        line-height: 2em;
+        justify-content: sp;
+        font-size: 30px;
+        font-weight: bolder;
+        color: white;
+        padding: 20px 0px;
+        
+    }
+
+    #header-text p {
+        width: 80%;
+        display: block;
+        margin: auto;
+
+    }
+
+    #header-image img {
+        display: none;
+        width: 75vw;
+        margin: 10px; 
+       
+    }
+    #header-buttons {
+        background: inherit;
+        margin: 0;
+        bottom: 0;
+        width: 90%;
+        margin: auto;
+        padding: 10px;
+    }
+    #header-buttons a {
+        display: block;
+        margin: 0;
+        font-weight: bold;
+        margin-top: 10px;
+        border: 1px solid;
+        text-align: center;
+        background: white;
+        border-radius: 10px;
+    }
+
+    #header-container {
+        padding: 20px 0 0 0;
+    
+        /* clip-path: polygon(0% 0%, 100% 0%, 100% 66%, 100% 57%, 100% 57%, 26% 88%, 0 100%); */
+        
+        /* display: grid;
+        justify-content: center;
+        display: none; */
+    }
+
+    #header-new {
+         display: none;
+     }
+}
+#header-image {
+    display: inline-block;
+    
+    /* animation: rotatePhone 3s infinite; */
+    height: 100%;
+}
+
+@keyframes rotatePhone {
+    from {
+        transform: none;
+    }
+    to {
+        transform: rotateY(180deg);
+        transform: rotateY(180deg)
+    }
+}
+#profile-alert {
+    background: skyblue;
+    padding: 10px;
+}
+
+@media(min-width: 500px) {
+    nav div {
+        margin-right: 40px;
+    }
+
+    #header-container {
+        clip-path: polygon(0 0, 100% 0, 100% 99%, 0 78%);
+
+        height: 33vh;
+    }
+}
+
+.navs {
+    display: inline-block;
+}

@@ -1,0 +1,51 @@
+#quiz-name {
+    font-size: x-large;
+}
+
+#quiz-name, #author input {
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+#quiz-name:focus, #author input:focus {
+    border-bottom: 2px solid  rgb(82, 82, 255);
+    outline: none;
+}
+
+.question .choice {
+    margin-left: 10px;
+    margin-top: 5px;
+}
+
+.add {
+    background:rgb(82, 82, 255);
+    border: none;
+    padding: 0.5em;
+    color: white;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.add:hover {
+    box-shadow: 2px 2px 2px grey;
+}
+
+.add:focus {
+    outline: none
+}
+
+.delete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px
+}
+
+.delete:hover {
+    box-shadow: 2px 2px 2px grey;
+}
+

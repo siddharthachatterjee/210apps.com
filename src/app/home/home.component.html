@@ -1,0 +1,342 @@
+
+
+<app-modal [show] = 'showNew'> 
+    <h1> 
+        <!-- <span style = 'position: fixed; top: 27vh; right: 55vh; color: red; cursor: pointer;' (click) = 'showNew = !showNew'> x </span> -->
+        New 
+        <hr />
+    </h1>
+    <a class = 'new' [routerLink] = 'user? "/create" : "/signin"'> New Quiz + </a>
+    <hr />
+    <a class = 'new' [routerLink] = 'user? "/new-survey" : "/signin"'> New Survey + </a> 
+</app-modal>
+<!-- <header (click) = 'showFullSearch = falseCondition'style = 'height: max-content; color: white;' *ngIf = '!searchValue.length'>
+    <div id = 'header-text'> 
+       <span> Create and view quizzes and surveys  </span>
+        <p> Use our software to create amazing quizzes and surveys for free </p>
+        <br />
+        <br />
+        <div id = 'header-buttons'>
+            <a [routerLink] = 'user? "account" : "signin"' class = 'nav-button' style = 'font-size: 18px;  text-decoration: none;'> 
+                {{ user? "View profile: " + user.displayName :  "Sign Up/Sign In" }}
+            </a>
+            <a  (click) = 'showNew = !showNew' id = 'header-new'class = 'nav-button' style = 'font-size: 18px;  text-decoration: none; cursor: pointer'> New + </a> -->
+        <!-- <a href = '/create' class = 'nav-button'style = 'font-size: 25px;  text-decoration: none;'> New Quiz + </a>
+        <a href = '/new-survey' class = 'nav-button'style = 'font-size: 25px; text-decoration: none;'> New Survey + </a> 
+        </div>
+    </div>
+    <div id = 'header-image'>
+        <img src = '../../assets/survey-example3.png' height = 'auto' width = '100%'/>
+    </div>
+</header> -->
+<app-sign-in  (signedIn) = 'onSignedIn()'*ngIf = 'route.snapshot.url.join("") == "signin" && !user'></app-sign-in>
+<div style = 'margin: 0;'*ngIf = 'route.snapshot.url.join("") == "account" && user'>
+    <div id = 'left-bar' [ngClass] = '{"close-menu": closeMenu}'>
+        <div [ngClass] = '{"hide-content": closeMenu}'>
+            <div (click) = 'closeMenu = true' id = 'close-menu-button' style = 'position: fixed; top: 85px; left: 50vw; font-size: x-large; color: red'> x </div>
+            <h1> 
+                <input [(ngModel)] = 'displayName'  [ngStyle] = '{width: displayName.length + "ch"}'style = 'font-size: x-large; resize:none;' id = 'username' />'s profile 
+                <button (click) = 'signOut()' id = 'signout' style = 'font-size: large;'>Sign Out</button> 
+            </h1>
+            <hr />
+            <div id = 'tabs' (click) = 'closeMenu = true'>
+                <span [ngClass] = '{"active": tab.includes("quizzes")}' (click) = 'switchTab("your quizzes")'> Your Quizzes </span>
+                <span [ngClass] = '{"active": tab.includes("surveys")}' (click) = 'switchTab("your surveys")'> Your Surveys </span>
+            </div>
+        </div>
+        <div  id = 'menu-button' style = 'font-size: x-large; height: 100%'*ngIf = 'closeMenu' (click) = 'closeMenu = false'>
+            <i class="ri-menu-line"></i>
+        </div>
+    </div>
+    <div>
+        <!-- <button id = 'accountnew' style = 'cursor: pointer; background: white;  color: blue; width: 40px; height: 40px; font-size: x-large; border-radius: 2em; border: none' (click) = 'showNew = !showNew'>  + </button> -->
+        <div style = 'color: red; margin: 20px 25vw;' *ngIf = '!user.emailVerified'> 
+            You have not verified this account.
+            You will not be able to create groups(update coming soon) if your account is not verified. 
+            <br />
+            To verify your account, look at the email sent from 
+            <strong>
+            noreply@quiz-802c1.firebaseapp.com
+            </strong>
+        </div>
+        <div *ngIf = '!usersQuizzes.length && !usersSurveys.length' style = 'margin: 20px 25vw;'>
+            You haven't created anything yet. <br /> Press "+" near the top right corner to create a quiz or survey.
+        </div>
+        <!-- <h1 *ngIf = 'usersQuizzes.length'> Your Quizzes </h1> -->
+        <quizzes [onlyUsers] = 'true' *ngIf = 'usersQuizzes.length && tab.includes("quizzes")' [searchValue] = '""' [showAll] = 'false' [show] = '[0, 10]' [data] = '"your quizzes"' [dataValues] = "usersQuizzes"></quizzes>
+        <!-- <br /> -->
+        <!-- <h1 *ngIf = 'usersSurveys.length'> Your surveys </h1> -->
+        <quizzes  [onlyUsers] = 'true' *ngIf = 'usersSurveys.length && tab.includes("surveys")' [searchValue] = '""' [showAll] = 'false' [show] = '[0, 10]' [data] = '"your surveys"' [dataValues] = "usersSurveys"></quizzes>
+    </div>
+</div>
+
+<!-- <br />
+<br />
+<br />
+<footer>
+    <a> + </a>
+</footer> -->
+<style>
+    #username {
+        max-width: 15vw;
+    }
+    #left-bar {
+        height: 100vh;
+        width: 15vw;
+        background: #1c1c1c;
+        position: fixed;
+        left: 0;
+        padding: 2em;
+        color: white;
+        top: 75px;
+    }
+    #signout {
+        position: fixed;
+        bottom: 50px;
+        display: block;
+        width: 15vw;
+        padding: 0.5em 0;
+        background: inherit;
+        border-radius: 5px;
+        border: 2px solid white;
+        color: white;
+        cursor: pointer;
+    }
+
+    @media(max-width: 500px) {
+        .showFullSearch {
+            width: 25vw;
+        }
+        #left-bar {
+            width: 50vw;
+        }
+        #signout {
+            width: 50vw;
+        }
+        #username {
+            max-width: 50vw;
+        }
+        #left-bar.close-menu {
+            animation-fill-mode: forwards;
+            animation-name: closeMenu;
+            animation-duration: 1s;
+            padding: 5px;
+        }
+
+        .hide-content {
+            display: none;
+        }
+        @keyframes closeMenu {
+            to {
+                width: 10vw
+            }
+        }
+    }
+
+    @media (min-width: 500px) {
+        #close-menu-button {
+            display: none;
+        }
+
+        #menu-button {
+            display: none;
+        }
+    }
+
+    
+
+    #tabs span {
+        padding: 10px;
+        color: grey;
+        margin-bottom: 5px;
+        display: block;
+        width: 100%;
+        cursor: pointer
+    }
+
+    #tabs span:hover {
+        color: whitesmoke
+    }
+    #tabs span.active {
+        color: white;
+        background: #333
+    }
+    .showFullSearch {
+        width: inherit;
+        background: whitesmoke;
+    }
+
+    .hideLogo {
+        opacity: 0;
+        width: 0;
+        overflow: hidden;
+        font-size: 1px;
+    }
+
+    @media(min-width: 500px) {
+        .hideLogo {
+            opacity: 1;
+            width: auto;
+            font-size: unset;
+        }
+
+        .showFullSearch {
+            width: 33vw
+        }
+    }
+
+    
+    .hideSearch {
+        width: 40px;
+        background: inherit;
+    }
+    header {
+        background: blue;
+        color: white;
+    }
+
+    @media(min-width: 500px) {
+         .hideSearch, .showFullSearch {
+             width: 33vw;
+             background: whitesmoke
+         }
+         #clearbutton {
+             display: none;
+         }
+
+         #accountnew {
+             display: block;
+         }
+
+
+         #accountnew:focus {
+             outline: none;
+         }
+        
+
+         #accountnew:hover {
+             box-shadow: 2px 2px 2px grey;
+         }
+    }
+
+    /* footer {
+        background: white;
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+        left: 0px;
+        text-align: center;
+        padding: 10px;
+    }
+    
+    footer  */
+    .nav-button:hover {
+        opacity: 0.7;
+    }
+
+    #header-text {
+        display: inline-block;
+        margin: 0px 50px; 
+        width: 50vw; 
+        color: white;
+        /* height: 35vh */
+    }
+
+    #header-text span {
+        font-size: 40px;
+        font-weight: bolder;
+    }
+
+    #header-buttons a {
+        margin-right: 10px;
+        color: #1c1c1c;
+        background: white;
+        padding: 0.6em;
+        display: inline-block;
+        border: 1px solid;
+        border-radius: 10px;
+    }
+    
+    @media(max-width: 800px) {
+        #header-text span {
+            font-size: 30px
+        }
+
+    }
+
+    header {
+            padding: 2em;
+        }
+    @media(max-width: 500px) {
+        #header-text {
+            margin: 0;
+            text-align: center;
+            width: 100vw;
+            color: white;
+        }
+        #header-text span {
+            background:  inherit;
+            width: 80%;
+            margin: auto;
+            display: block;
+            font-size: 30px;
+            font-weight: bolder;
+            color: whitesmoke;
+            padding: 20px 0px;
+            
+        }
+
+        #header-text p {
+            width: 80%;
+            display: block;
+            margin: auto;
+
+        }
+
+        #header-image img {
+            display: none;
+            width: 75vw;
+            margin: 10px; 
+           
+        }
+        #header-buttons {
+            background: inherit;
+            margin: 0;
+            bottom: 0;
+            width: 90%;
+            margin: auto;
+            padding: 10px;
+        }
+        #header-buttons a {
+            display: block;
+            margin: 0;
+            font-weight: bold;
+            margin-top: 10px;
+            border: 1px solid;
+            text-align: center;
+            background: white;
+            border-radius: 10px;
+        }
+
+        header {
+            padding: 20px 0 0 0;
+            background: blue
+           
+          
+        }
+
+        #header-new {
+             display: none;
+         }
+
+         #accountnew {
+            display: none;
+            color: red;
+        }
+    }
+    #header-image {
+        display: inline-block;
+        /* height: 30vh;  */
+        width: calc(35vw - 50px)
+    }
+</style>

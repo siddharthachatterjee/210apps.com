@@ -1,0 +1,109 @@
+<a class = 'survey-card'>
+    <h4> {{ survey.name }} </h4>
+    <img [src] = "'../assets/images/survey/' + survey.subject + '.jpg'" width = "100%" height = "60%" />
+    <h4 id = 'topic'> Topic: {{ survey.subject | titlecase }} </h4>
+    <h4 id = 'responses'> {{ responses }} <i class="ri-bar-chart-2-fill"></i>  </h4>
+</a>
+<style>
+.survey-card  {
+    background: white;
+    margin: 10px;
+    width: 300px;
+    border: 1px solid gray;
+    height: 300px;
+    padding: 10px;
+    overflow: auto;
+    background: white;
+    box-shadow: 5px 5px 5px grey;
+    border-radius: 5px;
+    cursor: pointer;
+    min-width: 100px;
+    display: inline-block;
+    color: black;
+    text-decoration: none;
+ }
+
+ .survey-card:hover {
+    box-shadow: 10px 10px 5px grey;
+    border: 1.75px solid blue;
+ }
+ .survey-card h4 {
+   margin: 0;
+   z-index: 1;
+   text-align: center;
+   white-space: nowrap;
+   font-size: x-large;
+   line-height: 1.5em;
+ }
+ .survey-card div {
+    text-align: center;
+    text-decoration: none;
+    color: black;
+    height: 100%;
+    
+ }
+
+ #topic {
+   font-weight: lighter;
+ }
+
+ #responses {
+   font-size: calc(inherit - 5px);
+    color: red;
+    align-items: center;
+ }
+
+ #responses i {
+    vertical-align: bottom;
+ }
+
+ /* @media (max-width: 1320px) {
+    .survey-card {
+       width: 18vw;
+       height: 20vw;
+       overflow: hidden;
+    }
+
+    .survey-card h4 {
+       font-size: 20px;
+    }
+
+    .survey-card:hover {
+       box-shadow: 5px 5px 5px grey;
+    }
+ }
+
+ 
+ @media (max-width: 950px) {
+    .survey-card h4 {
+       font-size: 16px;
+    }
+
+    
+
+    #views {
+       font-size: 14px;
+    }
+ }
+
+ @media (max-width: 750px) {
+    .survey-card h4 {
+       font-size: 12px;
+    }
+
+    #views {
+       display: none;
+    }
+ }  */
+
+ @media (max-width: 500px) {
+    .survey-card {
+       width: 50vw;
+       height: 50vw;
+    }
+
+    .survey-card h4 {
+       font-size: 14px;
+    }
+ }
+</style>

@@ -1,0 +1,10 @@
+<div class = 'card'>
+    <div id = 'icon' [ngStyle] = 'iconStyle'>
+        <ng-content select = 'header' id = 'icon'></ng-content>
+    </div>
+    <ng-content select = 'h1' id = 'heading'></ng-content>
+    <ng-content select = 'p' id = 'description'></ng-content>
+    <div id = 'call-to-action' [ngStyle] = 'iconStyle'>
+        <ng-content select = 'button'></ng-content>
+    </div>
+</div>

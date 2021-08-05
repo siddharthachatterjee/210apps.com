@@ -1,0 +1,20 @@
+<a (mouseover) = 'showFullQuizTitle = true' 
+    (mouseleave) = 'showFullQuizTitle=false' 
+    class = 'quiz-card'
+>
+    <h4 id = 'name'> 
+        {{ 
+            (showFullQuizTitle || quiz.name.length <= 25) ? 
+            quiz.name : 
+            (quiz.name.split('').slice(0, 24).join('') + '...') 
+        }} 
+    </h4>
+    <img [src] = 'quiz.img || "../assets/images/quiz/500_F_196650690_dp6IbxlOLqqQJ5OoRvn9a6YwVki23VwX.jpg"' width = '100%' height = '60%' />
+    <h4 id = 'author'>  by 
+        <span>
+            {{ showFullQuizTitle || quiz.author.length <= 25 ? quiz.author : quiz.author.split('').slice(0, 24).join('') + '...'}}
+        </span>
+     </h4>
+    <h4 id = 'views' *ngIf = 'quiz.status == "complete"'> {{ quiz.views || 0 }} <i class="ri-eye-fill"></i> </h4>
+    <h4 id = 'views' *ngIf = 'quiz.status === "incomplete"'> Incomplete! Edit here </h4>
+</a>

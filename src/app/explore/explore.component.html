@@ -1,0 +1,28 @@
+<header>
+    <h1> Explore Hundreds of Quizzes and Surveys </h1>
+</header>
+<div id = 'tabs'>
+    <span [ngClass] = '{"active": tab === "quizzes"}' (click) = 'switchTab("quizzes")'> 
+        <i class="ri-book-2-fill"></i>
+        <br />
+        Quizzes 
+    </span>
+    <span [ngClass] = '{"active": tab === "surveys"}' (click) = 'switchTab("surveys")'> 
+        <i class="ri-bar-chart-2-fill"></i>
+        <br />
+        Surveys 
+    </span>
+</div>
+<quizzes *ngIf = 'tab == "quizzes"'
+    [data] = 'tab' 
+    [searchValue] = 'searchValue' 
+    [dataValues] = 'quizzes' 
+    [show] = '[0, quizzes.length]'
+    [showAll] = 'false'></quizzes>
+
+ <quizzes *ngIf = 'tab == "surveys"'
+    [data] = 'tab' 
+    [searchValue] = 'searchValue' 
+    [dataValues] = 'surveys' 
+    [show] = '[0, surveys.length]'
+    [showAll] = 'false'></quizzes>

@@ -1,0 +1,38 @@
+<div id = 'sign-in-page'>
+    <span (click) = 'new = false' [ngStyle] = 'styles(false)'> Sign In </span>
+    <span (click) = 'new = true'[ngStyle] = 'styles(true)'> New? Sign Up </span>
+    <h4> Sign In to Create Quizzes and Surveys </h4>
+    <div *ngIf = 'error' style = 'color: red'> 
+        {{ errorMessage }}
+        <!-- Error! Requirements: enter a real email and password must be greater than 6 characters  -->
+    </div>
+    <div id = 'load' *ngIf = 'loading && !error'> Verifying credentials... </div>
+    <br />
+    <form (submit) = 'new? signUp($event) : signIn($event)'  autocomplete="on" method = 'post'>
+        Email
+        <input class = 'sign-in-input'
+        type = "text"
+        [value] = 'username' 
+        (input) = 'username = $event.target.value'
+        placeholder="example@email.com"
+        autocomplete="email"
+        />
+        <br />
+        <br />
+        Password:
+        <input class = 'sign-in-input'
+        [value] = 'password'
+        (input) = 'password = $event.target.value'
+        type = 'password'
+        placeholder="Password123"
+        autocomplete="current-password"
+        />
+        <br />
+        <br />
+        <input type = 'submit' class = 'sign-in-button' [value] = 'new? "Sign Up" : "Sign In"'  />
+        <!-- <button (click) = 'new? signUp() : signIn()'class = 'sign-in-button'>
+            Sign {{ new? 'Up' : 'In' }}
+
+        </button> -->
+    </form>
+</div>

@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<a routerLink = '/account'> <-- Back to profile </a>
+<!-- <app-create-quiz-additional-features  
+    [newQuiz] = 'newQuiz' 
+    *ngIf = '!quizCreated && !quizSaved && newQuiz.status === "incomplete"'
+>
+
+</app-create-quiz-additional-features> -->
+<div id = 'new-quiz' class = 'page' (click) = 'showAddOns = false'>
+    <ng-container *ngIf = '!quizCreated && !quizSaved && newQuiz.status === "incomplete"'>
+        <input id = 'quiz-name' [(ngModel)]="quizName" />
+        <!-- <button 
+            style = 'padding: 0.75em; font-size: 16px' 
+            *ngIf = 'newQuiz.questions.length'
+            class = 'add' 
+            (click) = 'saveQuiz()'> 
+
+            Save 
+        </button> -->
+        <button 
+            style = 'padding: 0.75em; font-size: 16px' 
+            *ngIf = 'newQuiz.questions.length'
+            class = 'add' 
+            (click) = 'createQuiz()'> 
+
+            Publish  
+        </button>
+        <span *ngIf = '!newQuiz.questions.length'> Create question(s) to publish  </span>
+        <p> Edits auto-save every second. View your profile to continue edit incomplete quizzes. </p>
+        <br />
+        <label for = 'setImage'> Set Quiz Image: </label>
+        <input id = 'setImage'type = 'file' [value] = 'newQuiz.img' (input) = 'setImage($event.target)'/>
+        <br />
+        <br />
+        Privacy: 
+        <select [(ngModel)] = 'privacy'>
+            <option value = 'false'> Public(Appears on the site) </option>
+            <option value = 'true'> Private(Only available via the URL) </option>
+        </select>
+        <br />
+        <div>
+            <br />
+            <button class = 'add' (click) = 'addQuestion()'> Add Question + </button>
+            <hr />
+        </div>
+        <br />
+        <ol class = 'questions'>
+            <li *ngFor = 'let question of newQuiz.questions; index as questionNumber' class = 'question'>
+                <textarea style = 'width: 100%'[value] = 'question.question' (input) = 'question.question = $event.target.value'></textarea>
+                <br />
+                <section *ngFor = 'let choice of question.choices; index as i' class = 'choice'>
+                    <strong> choice {{ letters[i] }}. </strong> 
+                    <input [value] = "choice.option" (input) = 'choice.option=$event.target.value' />
+                    <button class = 'delete' (click) = 'deleteChoice(questionNumber, i)'> Delete Choice </button>
+                    <br />
+                </section>
+                <button class = 'add' (click) = 'addChoice(questionNumber)'> Add Choice  + </button>
+                <br />
+                <h3 style = 'color:rgb(82, 82, 255)'>
+                    Correct answer:
+                    <select (change) = 'setCorrectAnswer(questionNumber, $event.target.value)'>
+                        <option 
+                            *ngFor = 'let choice of question.choices; index as i'
+                            [selected] = 'i===0'
+                            [value]='i'
+                        >
+                            {{ question.choices[i].option }}
+                        </option>
+                    </select>
+                </h3>
+                <button id = 'delete-question'class = 'delete' (click) = 'deleteQuestion(questionNumber)'> Delete Question </button>
+                <br />
+                <hr />
+            </li>
+        </ol>
+    </ng-container>
+    <ng-container *ngIf = 'quizCreated'>
+        <h1> Quiz successfully created! </h1>
+        You can view or invite others to try your quiz at 
+        <br />
+        <a [routerLink] = "['/', 'quizzes', quizKey]"> 
+            210apps.com/quizzes/{{ quizKey }} 
+        </a> 
+    </ng-container>
+    <ng-container *ngIf = 'quizSaved'>
+        <h1> Quiz saved! </h1>
+        <h3> 
+            Continue to edit your quiz at
+            <a [routerLink]="['/', 'edit', quizKey]">
+                210apps.com/edit/{{ quizKey }}
+            </a>
+        </h3>
+    </ng-container>
+    <ng-container *ngIf = 'newQuiz && newQuiz.status !== "incomplete"'>
+        <h1> This quiz has been published and cannot be edited </h1>
+    </ng-container>
+</div>

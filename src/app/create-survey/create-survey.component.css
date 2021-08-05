@@ -1,0 +1,51 @@
+#survey-name {
+    font-size: x-large;
+    width: 60%
+}
+
+#survey-name, #author input {
+    border: none;
+    border-bottom: 2px solid black;
+}
+
+#survey-name:focus, #author input:focus {
+    border-bottom: 2px solid  rgb(82, 255, 169);
+    outline: none;
+}
+
+.add {
+    background:rgb(82, 255, 169);
+    border: none;
+    padding: 0.5em;
+    color: black;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px;
+}
+
+.add:hover {
+    box-shadow: 2px 2px 2px grey;
+}
+
+.add:focus {
+    outline: none
+}
+
+.delete {
+    background: red;
+    color: white;
+    border: none;
+    padding: 0.5em;
+    border-radius: 5px;
+    cursor: pointer;
+    margin: 10px
+}
+
+.delete:hover {
+    box-shadow: 2px 2px 2px grey;
+}
+
+.choice {
+    margin-left: 10px;
+    margin-top: 5px;
+}

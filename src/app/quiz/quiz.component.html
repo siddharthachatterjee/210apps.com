@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<!-- <a style = 'font-size: large;' routerLink="/quizzes"> <-- Back to all quizzes </a> -->
+<div class = 'page' *ngIf = 'quiz'>
+    <h1 id = 'quiz-name'> {{ quiz.name }} by {{ quiz.author }}</h1>
+    <h3 *ngIf = 'quiz.tags && quiz.tags.length'> Tags: {{ quiz.tags.join(', ') }}</h3>
+    <h3 id = 'score-display'> 
+        Score: {{ correctAnswers }} / {{ correctAnswers + incorrectAnswers }} 
+        <span *ngIf = 'quizStatus.length'>  
+            = {{ (100 * (correctAnswers) / ( correctAnswers + incorrectAnswers)) | number }}% 
+        </span>  
+    </h3>
+    <div id = 'question' *ngIf = 'quiz.questions && selectedQuestion && quiz.questions[selectedQuestionIndex]'>
+        <h2> 
+            Question {{ selectedQuestionIndex + 1 }} of {{ quiz.questions.length }} 
+            <span *ngIf = 'quizStatus[selectedQuestionIndex]'> 
+                : {{ quizStatus[selectedQuestionIndex].isCorrect ? 'Correct'  : 'Incorrect' }}
+                <span *ngIf = 'tries > 1'> - {{ tries + (tries === 1 ? ' try' : ' tries') }} </span> 
+            </span> 
+            <br />
+            <img *ngIf = 'quiz.img' [src] = 'quiz.img' style = 'max-width: 50%; max-height: 50%;'/> 
+        </h2>
+        <span class = 'question' *ngIf = 'selectedQuestion'> {{ selectedQuestion.question }} </span>
+        <br />
+        <br />
+        <div class = 'choice' *ngFor = "let choice of selectedQuestion.choices; index as i">
+            <span (input) = 'checkAnswer($event, i)'> <input type = 'radio'  /> {{ choice.option }} </span>
+        </div>
+        <div *ngIf="showCorrectAlert" class = 'correct'>
+            Correct!
+        </div>
+        <div *ngIf = 'showCorrectAfterTries' class = 'semi-correct'>
+            Correct with {{ tries }} {{ tries === 1 ? 'try' : 'tries'}}
+        </div>
+    </div>
+    <div *ngIf = '!quiz.questions[selectedQuestionIndex]'>
+        <h2>  Results: </h2>
+        <ol>
+            <li *ngFor = 'let questionStatus of quizStatus; index as i'>
+                {{ quiz.questions[i].question }} 
+                <br />
+                <br />
+                Correct Answer: 
+                <span *ngFor = 'let correctAnswer of quiz.questions[i].correctAnswers'>
+                    {{ quiz.questions[i].choices[correctAnswer].option }}
+                </span>
+                <br />
+                <br />
+                Result: 
+                {{ questionStatus.isCorrect ? 'Correct' : 'Incorrect' }} 
+                <span *ngIf = 'questionStatus.tries > 1'> 
+                    with {{ questionStatus.tries + (questionStatus.tries === 1 ? ' try' : ' tries') }}
+                </span>
+                <br />
+                <br />
+            </li>
+        </ol>
+    </div>
+</div>

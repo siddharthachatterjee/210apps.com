@@ -1,0 +1,86 @@
+<a routerLink = '/account'> <-- Back to profile </a>
+<div class = 'page'>
+    <ng-container *ngIf = '!surveyCreated'>
+        <input id = 'survey-name' [(ngModel)] = 'newSurvey.name' />
+        <button 
+            style = 'padding: 0.75em; font-size: 16px' 
+            *ngIf = 'newSurvey.questions.length'
+            class = 'add' 
+            (click) = 'createSurvey()'> 
+
+            Create  
+        </button>
+        <span *ngIf = '!newSurvey.questions.length'> Add Question(s) to Create </span>
+        <br />
+        <br />
+        <h2>
+            Topic:
+            <select [(ngModel)] = 'newSurvey.subject' style = 'font-size: large;'>
+                <option value = 'political'> Political </option>
+                <option value = 'basketball'> Basketball </option>
+                <option value = 'soccer'> Soccer </option>
+                <option value = 'technology'> Technology </option>
+                <!-- <option value = 'social'> Social </option> -->
+                <option value = 'videogames'> Videogames </option>
+                <option value = 'school'> School </option>
+                <option value = 'other'> Other </option>
+            </select>
+        </h2>
+        <br />
+        <select [(ngModel)] = 'public'>
+            <option [value] = 'false'> Public(Appears on the site)</option>
+            <option [value] = 'true'> Private(Only available via the URL)</option>
+        </select>
+        <br />
+        <div>
+            <br />
+            <button class = 'add' (click) = 'addQuestion()'> 
+                Add Survey Question + 
+            </button>
+            <hr />
+        </div>
+        <ng-container class = 'questions'>
+            <ol>
+                <li *ngFor = 'let question of newSurvey.questions; index as questionNumber'>
+                    <input [(ngModel)] = 'question.question' />
+                    <strong> Type: </strong>
+                    <select [(ngModel)] = 'question.type'>
+                        <option value = 'single-answer'> Choose Single Answer </option>
+                        <option value = 'choice'> Choose Multiple Answers </option>
+                        <option value = 'open-ended'> Open Ended </option>
+                    </select>
+                    <ng-container *ngIf = 'question.type !== "open-ended"'>
+                        <div *ngFor = 'let choice of question.choices; index as choiceNumber' class = 'choice'>
+                            <strong> choice {{ letters [ choiceNumber ]}}.  </strong> 
+                            <input [(ngModel)] = 'choice.option' />
+                            <button class = 'delete' (click) = 'deleteChoice(questionNumber, choiceNumber)'> Delete Choice </button>
+                            <br />
+                        </div>
+                        <button class = 'add' (click) = 'addChoice(questionNumber)'> Add Choice + </button>
+                    </ng-container>
+                    <br *ngIf = 'question.type !== "open-ended"'/>
+                    <button class = 'delete' (click) = 'deleteQuestion(questionNumber)'>
+                        Delete Question
+                    </button>
+                    <hr />
+                </li>
+            </ol>
+        </ng-container>
+    </ng-container>
+    <ng-container *ngIf = 'surveyCreated'> 
+        <h1> Survey Successfully Created! </h1>
+        <h2> 
+            You can view or invite others to try your survey at 
+            <a [routerLink] = '["/", "surveys", surveyKey]'>
+                http://210apps.com/surveys/{{ surveyKey }}
+            </a>
+        </h2>
+        <h2> 
+            You can view the stats of your survey at
+            <a [routerLink] = '["/", "stats", surveyKey]'>
+                http://210apps.com/stats/{{ surveyKey }}
+            </a>
+        </h2>
+    </ng-container>
+    
+</div>
